@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSK Fashion Tailoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>RSK Fashion Tailoring</h1>
+    <p>Perfect Stitch. Perfect Fit.</p>
+</header>
+
+<section class="container">
+    <h2>Place Order</h2>
+
+    <form id="orderForm">
+        <input type="text" id="name" placeholder="Customer Name" required>
+        <input type="tel" id="phone" placeholder="Customer Phone" required>
+        <input type="text" id="measurements" placeholder="Measurements" required>
+
+        <select id="design">
+            <option value="">Select Design</option>
+            <option value="400">Simple Neck - ₹400</option>
+            <option value="1200">Aari Work - ₹1200</option>
+            <option value="2500">Bridal Heavy Work - ₹2500</option>
+        </select>
+
+        <h3>Total: ₹<span id="total">0</span></h3>
+
+        <button type="submit">Place Order</button>
+    </form>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
