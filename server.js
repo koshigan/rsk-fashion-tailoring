@@ -8,12 +8,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// VERY IMPORTANT: Serve static files
-app.use(express.static(__dirname));
+// Serve static files (VERY IMPORTANT)
+app.use(express.static(path.join(__dirname)));
+
+// Force index.html for root route
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 function getCurrentDateTime() {
-    const now = new Date();
-    return now.toLocaleString();
+    return new Date().toLocaleString();
 }
 
 app.post("/send-order", (req, res) => {
@@ -30,7 +34,11 @@ app.post("/send-order", (req, res) => {
 
     const ordersFile = path.join(__dirname, "orders.json");
 
-    const orders = JSON.parse(fs.readFileSync(ordersFile));
+    let orders = [];
+    if (fs.existsSync(ordersFile)) {
+        orders = JSON.parse(fs.readFileSync(ordersFile));
+    }
+
     orders.push(newOrder);
     fs.writeFileSync(ordersFile, JSON.stringify(orders, null, 2));
 
@@ -40,5 +48,5 @@ app.post("/send-order", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log("Server running on port " + PORT);
 });
