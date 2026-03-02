@@ -8,8 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Serve frontend files
-app.use(express.static(path.join(__dirname)));
+// VERY IMPORTANT: Serve static files
+app.use(express.static(__dirname));
 
 function getCurrentDateTime() {
     const now = new Date();
@@ -37,7 +37,6 @@ app.post("/send-order", (req, res) => {
     res.json({ message: "Order placed successfully!" });
 });
 
-// Required for Render dynamic port
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
